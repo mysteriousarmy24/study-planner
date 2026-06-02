@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:study_planner/Pages/consts/Styles.dart';
-import 'package:study_planner/Pages/consts/colors.dart';
+import 'package:study_planner/consts/Styles.dart';
+import 'package:study_planner/consts/colors.dart';
 import 'package:study_planner/services/courese_services.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -68,16 +68,19 @@ class HomeScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         final course = courses[index];
-                        return Card(
-                          color: primaryColor,
-                          child: ListTile(
-                            title: Text(
-                              course.name,
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            subtitle: Text(
-                              course.description,
-                              style: TextStyle(color: Colors.black),
+                        return GestureDetector(
+                          onTap: () => GoRouter.of(context).push("/single-course-page", extra: course),
+                          child: Card(
+                            color: const Color.fromARGB(255, 16, 120, 190),
+                            child: ListTile(
+                              title: Text(
+                                course.name,
+                                style: Styles.cardTitle,
+                              ),
+                              subtitle: Text(
+                                course.description,
+                                style: Styles.cardSubtitle,
+                              ),
                             ),
                           ),
                         );

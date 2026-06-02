@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:study_planner/Pages/consts/colors.dart';
+import 'package:study_planner/consts/colors.dart';
 
 /// Shared application styles for text, cards, buttons and inputs.
 ///
@@ -85,7 +85,7 @@ class Styles {
     borderRadius: BorderRadius.circular(20),
     boxShadow: [
       BoxShadow(
-        color: Colors.black.withOpacity(0.25),
+        color: Colors.black.withValues(alpha: 0.25),
         blurRadius: 12,
         offset: const Offset(0, 6),
       ),
@@ -103,7 +103,7 @@ class Styles {
     borderRadius: BorderRadius.circular(16),
     boxShadow: [
       BoxShadow(
-        color: primaryColor.withOpacity(0.35),
+        color: primaryColor.withValues(alpha: 0.35),
         blurRadius: 12,
         offset: const Offset(0, 6),
       ),
@@ -141,7 +141,10 @@ class Styles {
   }
 
   // Common spacing values used across screens.
-  static const EdgeInsets screenPadding = EdgeInsets.symmetric(horizontal: 20, vertical: 18);
+  static const EdgeInsets screenPadding = EdgeInsets.symmetric(
+    horizontal: 20,
+    vertical: 18,
+  );
   static const EdgeInsets cardContentPadding = EdgeInsets.all(18);
   static const EdgeInsets sectionSpacing = EdgeInsets.only(top: 18);
 }

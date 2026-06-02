@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:study_planner/Pages/add_new_assigenment.dart';
 import 'package:study_planner/Pages/add_new_course.dart';
+import 'package:study_planner/Pages/add_new_notes.dart';
 import 'package:study_planner/Pages/home_page.dart';
+import 'package:study_planner/Pages/single_course_page.dart';
+import 'package:study_planner/models/courses_model.dart';
 
 class RouterClass {
   final router = GoRouter(
@@ -18,6 +22,30 @@ class RouterClass {
         path: "/add-course",
         name: "AddCourse",
         builder: (context, state) => AddNewCourse(),
+      ),
+      GoRoute(
+        path: "/single-course-page",
+        name: "single course page",
+        builder: (context, state) {
+          final Courses course = state.extra as Courses;
+          return SingleCoursePage(course: course);
+        },
+      ),
+      GoRoute(
+        path: "/new-assignment",
+        name: "newAssignment",
+        builder: (context, state) {
+          final Courses course = state.extra as Courses;
+          return AddNewAssigenment(course: course);
+        },
+      ),
+      //add notes page
+      GoRoute(
+        path: "/new-note",
+        builder: (context, state) {
+          final Courses course = state.extra as Courses;
+          return AddNewNotes(course: course);
+        },
       ),
     ],
   );

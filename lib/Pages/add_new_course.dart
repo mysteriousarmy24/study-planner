@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:study_planner/Pages/consts/Styles.dart';
-import 'package:study_planner/Pages/models/courses_model.dart';
-import 'package:study_planner/Pages/widget/custom_text_field.dart';
-import 'package:study_planner/Pages/widget/cutom_button.dart';
+import 'package:study_planner/consts/Styles.dart';
+import 'package:study_planner/models/courses_model.dart';
+import 'package:study_planner/widget/custom_text_field.dart';
+import 'package:study_planner/widget/cutom_button.dart';
 import 'package:study_planner/helpers/snakbar.dart';
 import 'package:study_planner/services/courese_services.dart';
 
