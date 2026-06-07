@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:study_planner/consts/Styles.dart';
+import 'package:study_planner/helpers/snakbar.dart';
+import 'package:study_planner/models/assignment_model.dart';
 import 'package:study_planner/models/courses_model.dart';
+import 'package:study_planner/services/assignment_sevices.dart';
 import 'package:study_planner/widget/custom_text_field.dart';
 import 'package:study_planner/widget/cutom_button.dart';
 
@@ -30,7 +34,22 @@ class AddNewAssigenment extends StatelessWidget {
   //Form validations
   void _submitForm(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      print("hiiiiiiiiiiiiiiiiiiiiiiii");
+      final AssignmentModel assignment = AssignmentModel(
+        name: _assignmentNameContraller.text,
+        description: _descriptionContraller.text,
+        duration: int.tryParse(_durationgContraller.text) ?? 0,
+        date: _selectedDate.value,
+        time: _selectedTime.value,
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+      );
+      AssignmentSevices().createAssignment(course.id, assignment);
+      showSnackBar(massege: "Assignment Added..", context: context);
+      GoRouter.of(context).pop();
+      try {
+        // TODO: add assignment saving logic here
+      } catch (error) {
+        print('Error in adding new assignment.dart --_submitForm');
+      }
     }
   }
 
