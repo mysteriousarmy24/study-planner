@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:study_planner/Pages/models/courses_model.dart';
+import 'package:study_planner/models/courses_model.dart';
 
 class CoureseServices {
   // reference to firestore
