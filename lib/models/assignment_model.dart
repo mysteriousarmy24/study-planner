@@ -12,4 +12,25 @@ class AssignmentModel {
     required this.date,
     required this.time,
   });
+  //to Json
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'description': description,
+      'duration': duration,
+      'date': date,
+      'time': time,
+    };
+  }
+
+  //from json
+  factory AssignmentModel.fromJson(Map<String, dynamic> json) {
+    return AssignmentModel(
+      name: json['name'] ?? '',
+      description: json['description'] ?? '',
+      duration: json['duration'] ?? 0,
+      date: json['date'] ?? '',
+      time: json['time'] ?? '',
+    );
+  }
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_planner/Pages/add_new_assigenment.dart';
+
 import 'package:study_planner/Pages/add_new_course.dart';
 import 'package:study_planner/Pages/add_new_notes.dart';
 import 'package:study_planner/Pages/home_page.dart';
 import 'package:study_planner/Pages/single_course_page.dart';
-import 'package:study_planner/models/assignment_model.dart';
+
 import 'package:study_planner/models/courses_model.dart';
 
 class RouterClass {
@@ -45,7 +46,7 @@ class RouterClass {
         name: "newNotes",
         builder: (context, state) {
           final Courses course = state.extra as Courses;
-          return AddNewNotes(course: course);
+          return addNewNote(course: course);
         },
       ),
     ],
