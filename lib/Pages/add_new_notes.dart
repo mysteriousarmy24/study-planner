@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:study_planner/consts/Styles.dart';
+import 'package:study_planner/helpers/snakbar.dart';
 import 'package:study_planner/models/courses_model.dart';
+import 'package:study_planner/models/note_model.dart';
+import 'package:study_planner/services/cloud_storage/storage.dart';
+import 'package:study_planner/services/database/note_services.dart';
 import 'package:study_planner/widget/custom_text_field.dart';
 import 'package:study_planner/widget/cutom_button.dart';
 
@@ -39,6 +44,24 @@ class _addNewNoteState extends State<addNewNote> {
     });
   }
 
+  Future<void> _createNote() async {
+    // final imageUrl = StorageServices().uploadImage(
+    //   noteImage: _selectedImage,
+    //   courseId: widget.course.id,
+    // );
+    final Note note = Note(
+      imageData: _selectedImage != null ? File(_selectedImage!.path) : null,
+      title: _titleController.text,
+      description: _descriptionController.text,
+      sectionName: _sectionController.text,
+      referenceBooks: _referenceController.text,
+      id: ' ',
+    );
+    NoteServices().createNote(widget.course.id, note);
+    print("Done..................");
+    showSnackBar(massege: "Note Created..", context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,10 +82,10 @@ class _addNewNoteState extends State<addNewNote> {
                 SizedBox(height: 20),
                 CustomTextField(
                   validator: (value) {
-                    if (value != null) {
-                      return null;
-                    } else {
+                    if (value?.isEmpty ?? true) {
                       return "Enter a Title";
+                    } else {
+                      return null;
                     }
                   },
                   controller: _titleController,
@@ -72,10 +95,10 @@ class _addNewNoteState extends State<addNewNote> {
                 SizedBox(height: 10),
                 CustomTextField(
                   validator: (value) {
-                    if (value != null) {
-                      return null;
-                    } else {
+                    if (value?.isEmpty ?? true) {
                       return "Enter a Description";
+                    } else {
+                      return null;
                     }
                   },
                   controller: _descriptionController,
@@ -85,10 +108,10 @@ class _addNewNoteState extends State<addNewNote> {
                 SizedBox(height: 10),
                 CustomTextField(
                   validator: (value) {
-                    if (value != null) {
-                      return null;
-                    } else {
+                    if (value?.isEmpty ?? true) {
                       return "Enter a Section Name";
+                    } else {
+                      return null;
                     }
                   },
                   controller: _sectionController,
@@ -98,10 +121,10 @@ class _addNewNoteState extends State<addNewNote> {
                 SizedBox(height: 10),
                 CustomTextField(
                   validator: (value) {
-                    if (value != null) {
-                      return null;
+                    if (value?.isEmpty ?? true) {
+                      return "Enter a Reference Book";
                     } else {
-                      return "Enter a Reference book";
+                      return null;
                     }
                   },
                   controller: _referenceController,
@@ -135,7 +158,15 @@ class _addNewNoteState extends State<addNewNote> {
                       : Text("No Image Selected", style: Styles.bodyText),
                 ),
                 SizedBox(height: 10),
-                CustomElevatedButton(onPressed: () {}, text: "Submit Note"),
+                CustomElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _createNote();
+                      GoRouter.of(context).pop();
+                    }
+                  },
+                  text: "Submit Note",
+                ),
               ],
             ),
           ),

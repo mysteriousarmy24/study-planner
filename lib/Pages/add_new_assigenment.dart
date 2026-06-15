@@ -4,7 +4,7 @@ import 'package:study_planner/consts/Styles.dart';
 import 'package:study_planner/helpers/snakbar.dart';
 import 'package:study_planner/models/assignment_model.dart';
 import 'package:study_planner/models/courses_model.dart';
-import 'package:study_planner/services/assignment_sevices.dart';
+import 'package:study_planner/services/database/assignment_sevices.dart';
 import 'package:study_planner/widget/custom_text_field.dart';
 import 'package:study_planner/widget/cutom_button.dart';
 

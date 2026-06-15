@@ -5,7 +5,7 @@ import 'package:study_planner/models/courses_model.dart';
 import 'package:study_planner/widget/custom_text_field.dart';
 import 'package:study_planner/widget/cutom_button.dart';
 import 'package:study_planner/helpers/snakbar.dart';
-import 'package:study_planner/services/courese_services.dart';
+import 'package:study_planner/services/database/courese_services.dart';
 
 class AddNewCourse extends StatelessWidget {
   AddNewCourse({super.key});
@@ -130,14 +130,22 @@ class AddNewCourse extends StatelessWidget {
                         name: _courseNameController.text,
                         description: _courseDescriptionController.text,
                         duration: int.tryParse(_courseDurationController.text),
-                        schedule: DateTime.tryParse(_courseScheduleController.text),
+                        schedule: DateTime.tryParse(
+                          _courseScheduleController.text,
+                        ),
                         instructor: _courseInstructorController.text,
                       );
                       GoRouter.of(context).pop();
-                      showSnackBar(massege: "Coures added successfully...", context: context);
+                      showSnackBar(
+                        massege: "Coures added successfully...",
+                        context: context,
+                      );
                       // Add course to database
                     } else {
-                      showSnackBar(massege: "Fill the forms!!!", context: context);
+                      showSnackBar(
+                        massege: "Fill the forms!!!",
+                        context: context,
+                      );
                     }
                   },
                 ),

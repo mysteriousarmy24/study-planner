@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_planner/consts/Styles.dart';
 import 'package:study_planner/consts/colors.dart';
-import 'package:study_planner/services/courese_services.dart';
+import 'package:study_planner/services/database/courese_services.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -54,13 +54,15 @@ class HomeScreen extends StatelessWidget {
                   } else if (snapshot.hasError) {
                     return Text("Error ${snapshot.error}");
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Center(child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset("asset/course.png",width: 400,),
-                        Text("No courses added yet", style: Styles.bodyText,),
-                      ],
-                    ));
+                    return Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset("asset/course.png", width: 400),
+                          Text("No courses added yet", style: Styles.bodyText),
+                        ],
+                      ),
+                    );
                   } else {
                     final courses = snapshot.data!;
                     return ListView.builder(
@@ -69,14 +71,13 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final course = courses[index];
                         return GestureDetector(
-                          onTap: () => GoRouter.of(context).push("/single-course-page", extra: course),
+                          onTap: () => GoRouter.of(
+                            context,
+                          ).push("/single-course-page", extra: course),
                           child: Card(
                             color: const Color.fromARGB(255, 16, 120, 190),
                             child: ListTile(
-                              title: Text(
-                                course.name,
-                                style: Styles.cardTitle,
-                              ),
+                              title: Text(course.name, style: Styles.cardTitle),
                               subtitle: Text(
                                 course.description,
                                 style: Styles.cardSubtitle,
