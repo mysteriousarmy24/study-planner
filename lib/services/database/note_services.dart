@@ -48,4 +48,37 @@ class NoteServices {
       rethrow; // Re-throw to let the UI handle the error
     }
   }
+
+  //getting list of notes by course id
+  Stream<List<Note>> getNotes(String courseId) {
+    try {
+      final CollectionReference noteCollection = courseCollection
+          .doc(courseId)
+          .collection('note');
+      return noteCollection.snapshots().map((snapshot) {
+        return snapshot.docs
+            .map((doc) => Note.fromJson(doc.data() as Map<String, dynamic>))
+            .toList();
+      });
+    } catch (e) {
+      print("error in note services get notes by id $e");
+      return Stream.empty();
+    }
+  }
+
+  Future<Map<String, List<Note>>> getNotesFromCourseName(String name) async {
+    try {
+      final QuerySnapshot snapshot = await courseCollection.get();
+      final Map<String, List<Note>> notesMap = {};
+      for (final doc in snapshot.docs) {
+        final String id = doc.id;
+        final List<Note> notes = await getNotes(id).first;
+        notesMap[doc['name']] = notes;
+      }
+      return notesMap;
+    } catch (e) {
+      print("$e");
+      return {};
+    }
+  }
 }

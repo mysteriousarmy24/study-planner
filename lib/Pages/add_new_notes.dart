@@ -45,10 +45,6 @@ class _addNewNoteState extends State<addNewNote> {
   }
 
   Future<void> _createNote() async {
-    // final imageUrl = StorageServices().uploadImage(
-    //   noteImage: _selectedImage,
-    //   courseId: widget.course.id,
-    // );
     final Note note = Note(
       imageData: _selectedImage != null ? File(_selectedImage!.path) : null,
       title: _titleController.text,
