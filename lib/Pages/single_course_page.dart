@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_planner/consts/Styles.dart';
 import 'package:study_planner/consts/colors.dart';
-import 'package:study_planner/models/assignment_model.dart';
 import 'package:study_planner/models/courses_model.dart';
 
 class SingleCoursePage extends StatelessWidget {

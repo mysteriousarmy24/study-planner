@@ -13,7 +13,7 @@ import 'package:study_planner/widget/cutom_button.dart';
 
 class addNewNote extends StatefulWidget {
   final Courses course;
-  addNewNote({super.key, required this.course});
+  const addNewNote({super.key, required this.course});
 
   @override
   State<addNewNote> createState() => _addNewNoteState();

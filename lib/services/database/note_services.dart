@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:study_planner/models/courses_model.dart';
 import 'package:study_planner/models/note_model.dart';
 import 'package:study_planner/services/cloud_storage/storage.dart';
 
@@ -13,12 +12,19 @@ class NoteServices {
     try {
       String? imageUrl;
       if (note.imageData != null) {
-        String uploadedUrl = await StorageServices().uploadImage(
-          noteImage: note.imageData,
-          courseId: courseId,
-        );
-        // Only set imageUrl if upload was successful (non-empty)
-        imageUrl = uploadedUrl.isNotEmpty ? uploadedUrl : null;
+        try {
+          String uploadedUrl = await StorageServices().uploadImage(
+            noteImage: note.imageData,
+            courseId: courseId,
+          );
+          // Only set imageUrl if upload was successful (non-empty)
+          imageUrl = uploadedUrl.isNotEmpty ? uploadedUrl : null;
+        } catch (uploadError) {
+          print(
+            "Warning: Image upload failed, saving note without image: $uploadError",
+          );
+          imageUrl = null;
+        }
       }
       //creating new note obj
       final Note newNote = Note(
@@ -38,7 +44,8 @@ class NoteServices {
       //Update note ID with doument ID
       await docRef.update({'id': docRef.id});
     } catch (e) {
-      print("Error in store naotes $e");
+      print("Error in store notes $e");
+      rethrow; // Re-throw to let the UI handle the error
     }
   }
 }
