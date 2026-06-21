@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1023377860431",
-    "project_id": "study-planner-f7694",
-    "storage_bucket": "study-planner-f7694.firebasestorage.app"
+    "project_number": "267423510706",
+    "project_id": "studies-planner-45690",
+    "storage_bucket": "studies-planner-45690.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1023377860431:android:5bbdc0a076155488ea473a",
+        "mobilesdk_app_id": "1:267423510706:android:b58be255ad46165992d9ab",
         "android_client_info": {
           "package_name": "com.example.study_planner"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCp7e3238pQNzAx1gryOScFMNdfP4xAELs"
+          "current_key": "AIzaSyBMrdqE22_Hgop_Hp18bMwGW5q-dGw1428"
         }
       ],
       "services": {

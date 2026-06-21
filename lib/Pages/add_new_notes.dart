@@ -6,7 +6,6 @@ import 'package:study_planner/consts/Styles.dart';
 import 'package:study_planner/helpers/snakbar.dart';
 import 'package:study_planner/models/courses_model.dart';
 import 'package:study_planner/models/note_model.dart';
-import 'package:study_planner/services/cloud_storage/storage.dart';
 import 'package:study_planner/services/database/note_services.dart';
 import 'package:study_planner/widget/custom_text_field.dart';
 import 'package:study_planner/widget/cutom_button.dart';

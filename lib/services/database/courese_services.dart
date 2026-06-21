@@ -32,4 +32,16 @@ class CoureseServices {
       return Stream.empty();
     }
   }
+
+  Future<List<Courses>> getCourses() async {
+    try {
+      final QuerySnapshot snapshot = await courseCollection.get();
+      return snapshot.docs.map((doc) {
+        return Courses.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
+    } catch (e) {
+      print("Error i n course services $e");
+      return [];
+    }
+  }
 }

@@ -66,7 +66,7 @@ class NoteServices {
     }
   }
 
-  Future<Map<String, List<Note>>> getNotesFromCourseName(String name) async {
+  Future<Map<String, List<Note>>> getNotesFromCourseName() async {
     try {
       final QuerySnapshot snapshot = await courseCollection.get();
       final Map<String, List<Note>> notesMap = {};
