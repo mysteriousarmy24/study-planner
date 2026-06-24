@@ -188,8 +188,12 @@ class CoursesScreen extends StatelessWidget {
                                                         66,
                                                       ),
                                                   title: Text(singleNote.title),
-                                                  subtitle: Text(
-                                                    'Section: ${singleNote.sectionName}',
+                                                  subtitle: Column(
+                                                    children: [
+                                                      Text(
+                                                        'Section: ${singleNote.sectionName}',
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               );
