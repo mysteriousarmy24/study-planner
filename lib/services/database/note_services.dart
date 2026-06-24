@@ -3,9 +3,9 @@ import 'package:study_planner/models/note_model.dart';
 import 'package:study_planner/services/cloud_storage/storage.dart';
 
 class NoteServices {
-  //firbase instanse
+  // Firebase instance, matching the course collection used elsewhere.
   final CollectionReference courseCollection = FirebaseFirestore.instance
-      .collection('courses');
+      .collection('course');
 
   //Store notes
   Future<void> createNote(String courseId, Note note) async {

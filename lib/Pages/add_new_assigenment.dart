@@ -38,7 +38,7 @@ class AddNewAssigenment extends StatelessWidget {
         name: _assignmentNameContraller.text,
         description: _descriptionContraller.text,
         duration: int.tryParse(_durationgContraller.text) ?? 0,
-        date: _selectedDate.value.toLocal().toString().split(' ')[0],
+        date: _selectedDate.value.toLocal(),
         time: _selectedTime.value.format(context),
       );
       AssignmentSevices().createAssignment(course.id, assignment);
