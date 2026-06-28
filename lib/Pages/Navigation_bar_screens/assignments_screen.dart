@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:study_planner/consts/Styles.dart';
 import 'package:study_planner/models/assignment_model.dart';
 import 'package:study_planner/services/database/assignment_sevices.dart';
+import 'package:study_planner/widget/count_down.dart';
 
 class AssignmentsScreen extends StatelessWidget {
   const AssignmentsScreen({super.key});
+
   Future<Map<String, List<AssignmentModel>>> _fetchAssigenments() async {
     return AssignmentSevices().getAssignmentsFromCourseName();
   }
@@ -56,6 +58,8 @@ class AssignmentsScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 4),
                         Text(assignment.description, style: Styles.bodyText),
+                        SizedBox(height: 4),
+                        CountDown(dueDate: assignment.date),
                       ],
                     ),
 
