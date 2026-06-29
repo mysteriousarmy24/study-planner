@@ -33,8 +33,10 @@ class AssignmentSevices {
       return assignmentCollection.snapshots().map((snapshot) {
         return snapshot.docs
             .map(
-              (doc) =>
-                  AssignmentModel.fromJson(doc.data() as Map<String, dynamic>),
+              (doc) => AssignmentModel.fromJson(
+                doc.data() as Map<String, dynamic>,
+                doc.id,
+              ),
             )
             .toList();
       });

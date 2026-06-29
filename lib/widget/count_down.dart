@@ -59,7 +59,6 @@ class _CountDownState extends State<CountDown> {
         color: Colors.red,
       ),
     );
-    ;
   }
 
   String _formattedDuration(Duration duration) {

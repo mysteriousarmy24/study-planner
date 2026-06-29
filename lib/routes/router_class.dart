@@ -5,6 +5,7 @@ import 'package:study_planner/Pages/add_new_assigenment.dart';
 import 'package:study_planner/Pages/add_new_course.dart';
 import 'package:study_planner/Pages/add_new_notes.dart';
 import 'package:study_planner/Pages/home_page.dart';
+import 'package:study_planner/Pages/notification_page.dart';
 import 'package:study_planner/Pages/single_course_page.dart';
 
 import 'package:study_planner/models/courses_model.dart';
@@ -47,6 +48,12 @@ class RouterClass {
         builder: (context, state) {
           final Courses course = state.extra as Courses;
           return addNewNote(course: course);
+        },
+      ),
+      GoRoute(
+        path: "/notifications",
+        builder: (context, state) {
+          return NotificationPage();
         },
       ),
     ],

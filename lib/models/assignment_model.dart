@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AssignmentModel {
+  final String? id;
   final String name;
   final String description;
   final int duration;
@@ -13,6 +14,7 @@ class AssignmentModel {
     required this.duration,
     required this.date,
     required this.time,
+    this.id,
   });
   //to Json
   Map<String, dynamic> toJson() {
@@ -26,7 +28,7 @@ class AssignmentModel {
   }
 
   //from json
-  factory AssignmentModel.fromJson(Map<String, dynamic> json) {
+  factory AssignmentModel.fromJson(Map<String, dynamic> json, [String? docId]) {
     final dateValue = json['date'];
     DateTime parsedDate;
 
@@ -41,6 +43,7 @@ class AssignmentModel {
     }
 
     return AssignmentModel(
+      id: json['id'] ?? docId,
       name: json['name'] ?? '',
       description: json['description'] ?? '',
       duration: json['duration'] ?? 0,
