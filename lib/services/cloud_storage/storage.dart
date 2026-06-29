@@ -1,11 +1,18 @@
+// Firebase Storage SDK — used to upload files (images) and obtain
+// download URLs. Make sure your Firebase Storage security rules allow
+// the intended read/write operations for authenticated users.
 import 'package:firebase_storage/firebase_storage.dart';
 
 class StorageServices {
-  //firebase instance
+  // Firebase Storage singleton instance. Use this to create `Reference`s
+  // and perform uploads/downloads.
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
   Future<String> uploadImage({required noteImage, required courseId}) async {
     try {
+      // `noteImage` is expected to be a `File` (dart:io) representing
+      // the image picked by the user. If you're using web, you'll need a
+      // different upload method (e.g., using bytes).
       // Use timestamp-based filename to avoid invalid characters in path
       String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
       Reference ref = _storage
@@ -43,6 +50,8 @@ class StorageServices {
       await ref.getMetadata();
       return true;
     } catch (e) {
+      // If `getMetadata` fails it usually means the file was deleted or
+      // the URL isn't reachable under current security rules.
       print("Image not found at URL: $e");
       return false;
     }

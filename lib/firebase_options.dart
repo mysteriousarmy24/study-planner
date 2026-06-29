@@ -1,3 +1,10 @@
+// This file contains platform-specific Firebase configuration generated
+// by the FlutterFire CLI. It maps each supported platform to the
+// corresponding `FirebaseOptions` (API key, App ID, project ID, etc.).
+//
+// IMPORTANT for beginners: These values are safe to include in your
+// client app (they are not secret server credentials). They are used
+// by the Firebase SDK to connect to your Firebase project.
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart';
 
@@ -51,3 +58,7 @@ class DefaultFirebaseOptions {
     }
   }
 }
+
+// Usage note: In `main.dart` call `Firebase.initializeApp(
+// options: DefaultFirebaseOptions.currentPlatform)` so the SDK knows
+// which configuration to use for the running platform.

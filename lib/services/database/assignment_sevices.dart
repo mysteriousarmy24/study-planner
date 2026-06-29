@@ -1,8 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:study_planner/models/assignment_model.dart';
 
+// Service class that encapsulates Firestore operations related to
+// assignments. Keeping Firestore logic here (instead of UI code) makes
+// it easier to test and maintain.
 class AssignmentSevices {
-  //creating a firestore reference
+  // Top-level `course` collection reference. Each course document
+  // contains an `assignment` subcollection where assignment documents
+  // are stored.
   final CollectionReference courseCollection = FirebaseFirestore.instance
       .collection("course");
 
@@ -12,12 +17,17 @@ class AssignmentSevices {
     AssignmentModel assignment,
   ) async {
     try {
+      // Convert the model to a JSON map suitable for Firestore.
       final Map<String, dynamic> data = assignment.toJson();
+
+      // Each course document has an `assignment` subcollection.
       final CollectionReference assignmentCollection = courseCollection
           .doc(courseId)
           .collection('assignment');
+
+      // Add a new document and then update it with its generated ID.
+      // This pattern allows the app to later refer to the document by id.
       DocumentReference docRef = await assignmentCollection.add(data);
-      //update the assignment ID with document ID
       await docRef.update({'id': docRef.id});
     } catch (e) {
       print("Error in creating assignment....$e");
@@ -30,6 +40,8 @@ class AssignmentSevices {
       final CollectionReference assignmentCollection = courseCollection
           .doc(courseId)
           .collection('assignment');
+      // Listen to real-time updates using `.snapshots()` and map each
+      // document to `AssignmentModel` using the factory method.
       return assignmentCollection.snapshots().map((snapshot) {
         return snapshot.docs
             .map(
@@ -57,7 +69,10 @@ class AssignmentSevices {
         final List<AssignmentModel> assignments = await getAssignments(
           id,
         ).first;
-
+        // Use the course document's `name` field as the map key and
+        // the list of assignments as the value. This is a convenience
+        // wrapper used by the UI — it fetches all courses and then the
+        // assignments for each course.
         assignmentsMap[doc['name']] = assignments;
       }
       return assignmentsMap;

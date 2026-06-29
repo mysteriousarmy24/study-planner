@@ -2,8 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:study_planner/models/note_model.dart';
 import 'package:study_planner/services/cloud_storage/storage.dart';
 
+// Service that stores notes in a `note` subcollection under each
+// `course` document. If a note includes an image, the image is first
+// uploaded to Firebase Storage and the resulting download URL is saved
+// in the note document.
 class NoteServices {
-  // Firebase instance, matching the course collection used elsewhere.
+  // `course` collection reference (shared convention across services).
   final CollectionReference courseCollection = FirebaseFirestore.instance
       .collection('course');
 
@@ -13,6 +17,8 @@ class NoteServices {
       String? imageUrl;
       if (note.imageData != null) {
         try {
+          // Upload the image file to Firebase Storage and get the
+          // download URL. `note.imageData` should be a `File` on mobile.
           String uploadedUrl = await StorageServices().uploadImage(
             noteImage: note.imageData,
             courseId: courseId,
@@ -55,6 +61,7 @@ class NoteServices {
       final CollectionReference noteCollection = courseCollection
           .doc(courseId)
           .collection('note');
+      // Stream real-time note updates for the course.
       return noteCollection.snapshots().map((snapshot) {
         return snapshot.docs
             .map((doc) => Note.fromJson(doc.data() as Map<String, dynamic>))
